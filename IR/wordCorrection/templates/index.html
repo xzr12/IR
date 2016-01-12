@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>搜</title>
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/buttons.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.amazeui.org/amazeui/2.5.0/css/amazeui.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.amazeui.org/amazeui/2.5.0/css/amazeui.min.css">
+    <script type="text/javascript" src="/static/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <div id="head">
+        <div id="logo">搜</div>
+        <form method="post" action="/search/">
+            <input type="text" id="search" class="input" name="search_input" placeholder="搜索" maxlength="100" required>
+            <button id="sure" class="button button-rounded button-flat" type="submit"><img style="height: 100%; width: 100%;" src="/static/search.png"/></button>
+        </form>
+    </div>
+    {% if error %}
+        <div id="content">
+            <div id="correct">{{ error }}</div>
+        </div>
+    {% else %}
+        <div id="content">
+            <div id="result">找到约{{ times }}条结果，用时{{ time }}秒</div>
+            {% if change == 1%}
+                <div id="correct">显示的是以下查询字词的结果：<a href="/noCorrectSearch/{{ output }}">{{ output }}</a></div>
+                <div id="old">仍然搜索：<a href="/noCorrectSearch/{{ input }}">{{ input }}</a></div>
+            {% endif %}
+            {% for i in results %}
+                <div class="one">
+                    <div class="title"><a href={{ i.href }}>{{ i.title }}</a></div>
+                    <div class="href">{{ i.href }}</div>
+                    <div class="content">
+                        {% for j in i.content %}
+                            {% if j == '<em>' %}
+                                <em style="color: red; font-style: normal;">
+                            {% elif j == '</em>' %}
+                                </em>
+                            {% else %}
+                                {{ j }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+<script>
+    document.getElementById('search').value = "{{ input }}";
+{#    var pageNow = {{ pageNow }};#}
+{#    var page = {{ page }};#}
+{#    var contentAll = "{{ content }}";#}
+{#    CAll = contentAll.split('\t');#}
+{#    for (i = 0; i < content.length; i++) {#}
+{#        $('.content')[i].innerText = CAll[i];#}
+{#    }#}
+</script>
+</html>

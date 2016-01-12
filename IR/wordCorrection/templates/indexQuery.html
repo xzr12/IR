@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>搜</title>
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/buttons.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.amazeui.org/amazeui/2.5.0/css/amazeui.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.amazeui.org/amazeui/2.5.0/css/amazeui.min.css">
+    <script type="text/javascript" src="/static/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <div id="pic"><img src="/static/christmas.jpg"></div>
+    <div id="sou">
+        <form method="post" action="/search/">
+            <input type="text" id="search" class="input" style="width: 87%; background-color: white;" name="search_input" placeholder="搜索" maxlength="100" required autofocus>
+            <button id="sure" class="button button-rounded button-flat" style="background-color: transparent;" type="submit"><img style="height: 100%; width: 100%;" src="/static/search.png"/></button>
+        </form>
+    </div>
+</body>
+</html>
